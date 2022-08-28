@@ -2,10 +2,10 @@ module.exports = function (RED) {
   function DateTrans(config) {
     // RED.nodes.createNode -> 노드를 생성
     RED.nodes.createNode(this, config);
-    const node = this;
+    var node = this;
     // 노드의 입력에서 전달 받은 값을 처리하는 함수를 등록
     node.on("input", function (msg) {
-      const timestamp = msg.payload;
+      var timestamp = msg.payload;
       msg.payload = new Date(timestamp).toString();
       // 변환된 메시지를 전달
       node.send(msg);
