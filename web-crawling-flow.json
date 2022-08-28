@@ -1,0 +1,117 @@
+[
+    {
+        "id": "6dc3a74c7e68c55d",
+        "type": "tab",
+        "label": "Web Crawling",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "865e7093ed897949",
+        "type": "http request",
+        "z": "6dc3a74c7e68c55d",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "www.naver.com",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 300,
+        "wires": [
+            [
+                "c4a5eafd8624e065",
+                "20ac74e51826856f"
+            ]
+        ]
+    },
+    {
+        "id": "bdb5229ca9544c5d",
+        "type": "inject",
+        "z": "6dc3a74c7e68c55d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "865e7093ed897949"
+            ]
+        ]
+    },
+    {
+        "id": "c4a5eafd8624e065",
+        "type": "debug",
+        "z": "6dc3a74c7e68c55d",
+        "name": "request를 통해 수신되는 값",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "20ac74e51826856f",
+        "type": "file",
+        "z": "6dc3a74c7e68c55d",
+        "name": "",
+        "filename": "C:\\Users\\Admin\\Desktop\\node-sample\\index.html",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 670,
+        "y": 400,
+        "wires": [
+            [
+                "9eab06dd62f6c6e7"
+            ]
+        ]
+    },
+    {
+        "id": "9eab06dd62f6c6e7",
+        "type": "debug",
+        "z": "6dc3a74c7e68c55d",
+        "name": "msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 400,
+        "wires": []
+    }
+]

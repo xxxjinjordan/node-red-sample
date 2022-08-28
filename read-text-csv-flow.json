@@ -1,0 +1,188 @@
+[
+    {
+        "id": "e60591837b76d86d",
+        "type": "tab",
+        "label": "Reading text, csv",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "25d98ee698fe2bf9",
+        "type": "inject",
+        "z": "e60591837b76d86d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "e244e256e99b390e"
+            ]
+        ]
+    },
+    {
+        "id": "e244e256e99b390e",
+        "type": "file in",
+        "z": "e60591837b76d86d",
+        "name": "File Read",
+        "filename": "C:\\Users\\Admin\\Desktop\\node-sample\\score.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 320,
+        "y": 400,
+        "wires": [
+            [
+                "c1e64856b59cd945",
+                "148746660a013a91"
+            ]
+        ]
+    },
+    {
+        "id": "c1e64856b59cd945",
+        "type": "csv",
+        "z": "e60591837b76d86d",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 490,
+        "y": 400,
+        "wires": [
+            [
+                "5d57c8a02ddf2236",
+                "488d52aeaea1914c"
+            ]
+        ]
+    },
+    {
+        "id": "148746660a013a91",
+        "type": "debug",
+        "z": "e60591837b76d86d",
+        "name": "txt 로드 결과",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "5d57c8a02ddf2236",
+        "type": "switch",
+        "z": "e60591837b76d86d",
+        "name": "",
+        "property": "payload.score",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "50",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 400,
+        "wires": [
+            [
+                "a9998acee89aac5e"
+            ]
+        ]
+    },
+    {
+        "id": "a9998acee89aac5e",
+        "type": "join",
+        "z": "e60591837b76d86d",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 830,
+        "y": 420,
+        "wires": [
+            [
+                "d7ce70905fe95a28"
+            ]
+        ]
+    },
+    {
+        "id": "d7ce70905fe95a28",
+        "type": "debug",
+        "z": "e60591837b76d86d",
+        "name": "msg.payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "488d52aeaea1914c",
+        "type": "debug",
+        "z": "e60591837b76d86d",
+        "name": "CSV 처리 결과",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 260,
+        "wires": []
+    }
+]

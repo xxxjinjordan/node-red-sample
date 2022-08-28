@@ -1,0 +1,42 @@
+[
+    {
+        "id": "8fd0ffe710595f3d",
+        "type": "tab",
+        "label": "RSS Feed",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8f6b10e9bac50de7",
+        "type": "feedparse",
+        "z": "8fd0ffe710595f3d",
+        "name": "",
+        "url": "https://www.yonhapnewstv.co.kr/category/news/headline/feed/",
+        "interval": "1",
+        "ignorefirst": false,
+        "x": 380,
+        "y": 380,
+        "wires": [
+            [
+                "a9194312c9705404"
+            ]
+        ]
+    },
+    {
+        "id": "a9194312c9705404",
+        "type": "debug",
+        "z": "8fd0ffe710595f3d",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 500,
+        "wires": []
+    }
+]

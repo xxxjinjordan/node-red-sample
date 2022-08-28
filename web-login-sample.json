@@ -1,0 +1,239 @@
+[
+    {
+        "id": "6246178f9ffb13c4",
+        "type": "tab",
+        "label": "Web Login Sample",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "67c06333111d71d7",
+        "type": "http in",
+        "z": "6246178f9ffb13c4",
+        "name": "",
+        "url": "/home",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 480,
+        "wires": [
+            [
+                "3304bbf370fc4fbb"
+            ]
+        ]
+    },
+    {
+        "id": "3304bbf370fc4fbb",
+        "type": "template",
+        "z": "6246178f9ffb13c4",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html>\n    <body>\n        <h1>Node-RED Test Page</h1>\n        <a href=\"./login\">로그인 하기</a>\n    </body>\n</html>",
+        "output": "str",
+        "x": 300,
+        "y": 480,
+        "wires": [
+            [
+                "0681061ce0b857de"
+            ]
+        ]
+    },
+    {
+        "id": "0681061ce0b857de",
+        "type": "http response",
+        "z": "6246178f9ffb13c4",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 510,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "c8b44eb303730543",
+        "type": "http in",
+        "z": "6246178f9ffb13c4",
+        "name": "",
+        "url": "/login",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 580,
+        "wires": [
+            [
+                "d8d3ec8987bff1bd"
+            ]
+        ]
+    },
+    {
+        "id": "07543d554b991e46",
+        "type": "http in",
+        "z": "6246178f9ffb13c4",
+        "name": "",
+        "url": "/check",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 740,
+        "wires": [
+            [
+                "e5ec01e290180636"
+            ]
+        ]
+    },
+    {
+        "id": "d8d3ec8987bff1bd",
+        "type": "template",
+        "z": "6246178f9ffb13c4",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html>\n    <body>\n        <h1>로그인</h1>\n        <form action=\"/check\" method=\"get\">\n            <label for=\"fid\">아이디</label>\n            <input type=\"text\" id=\"fid\" name=\"fid\"><br><br>\n            <label for=\"fpw\">비밀번호</label>\n            <input type=\"password\" id=\"fpw\" name=\"fpw\"><br><br>\n            <input type=\"submit\" value=\"Submit\">\n    </body>\n</html>",
+        "output": "str",
+        "x": 300,
+        "y": 580,
+        "wires": [
+            [
+                "70a7c8593447bbae"
+            ]
+        ]
+    },
+    {
+        "id": "70a7c8593447bbae",
+        "type": "http response",
+        "z": "6246178f9ffb13c4",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 510,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "e5ec01e290180636",
+        "type": "function",
+        "z": "6246178f9ffb13c4",
+        "name": "function 1",
+        "func": "if(msg.payload.fid == 'ssafy' && msg.payload.fpw == 'ssafy'){\n    msg.payload.result = 1;\n} else {\n    msg.payload.result = 0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 740,
+        "wires": [
+            [
+                "fb790348f9dfcacd",
+                "d51bb3f4418813dd"
+            ]
+        ]
+    },
+    {
+        "id": "fb790348f9dfcacd",
+        "type": "switch",
+        "z": "6246178f9ffb13c4",
+        "name": "",
+        "property": "payload.result",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 450,
+        "y": 740,
+        "wires": [
+            [
+                "c8c0c5b5a7873408",
+                "1adbbaab70864a4d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c8c0c5b5a7873408",
+        "type": "template",
+        "z": "6246178f9ffb13c4",
+        "name": "로그인 성공 화면",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html>\n    <body>\n        <h1>방문을 환영합니다.</h1>\n        <p> 입력하신 아이디는 {{payload.fid}} 입니다.</p>\n        <p><a href=\"/home\">홈으로 가기</a>\n    </body>\n</html>",
+        "output": "str",
+        "x": 650,
+        "y": 700,
+        "wires": [
+            [
+                "b63706a7a3b3e3b6"
+            ]
+        ]
+    },
+    {
+        "id": "1adbbaab70864a4d",
+        "type": "template",
+        "z": "6246178f9ffb13c4",
+        "name": "로그인 실패 화면",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html>\n    <body>\n        <h1>로그인에 실패했습니다.</h1>\n        <p> 입력하신 아이디는 {{payload.fid}} 입니다.</p>\n        <p><a href=\"/home\">홈으로 가기</a>\n    </body>\n</html>",
+        "output": "str",
+        "x": 650,
+        "y": 780,
+        "wires": [
+            [
+                "b63706a7a3b3e3b6"
+            ]
+        ]
+    },
+    {
+        "id": "b63706a7a3b3e3b6",
+        "type": "http response",
+        "z": "6246178f9ffb13c4",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 870,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "d51bb3f4418813dd",
+        "type": "debug",
+        "z": "6246178f9ffb13c4",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 680,
+        "wires": []
+    }
+]
